@@ -1,0 +1,397 @@
+/* Matrix Base Styles - Core theme and layout */
+
+/* CSS Variables - Matrix Color Palette */
+:root {
+    /* Core Matrix Colors */
+    --matrix-black: #000000;
+    --matrix-deep-black: #0d1117;
+    --matrix-charcoal: #1a1a1a;
+    
+    /* Green Spectrum */
+    --matrix-bright-green: #00FF00;
+    --matrix-neon-green: #39ff14;
+    --matrix-lime-green: #32cd32;
+    --matrix-dark-green: #008000;
+    --matrix-forest-green: #228B22;
+    --matrix-mint-green: #00ff7f;
+    --matrix-electric-green: #00ffff;
+    
+    /* Supporting Colors */
+    --matrix-white: #ffffff;
+    --matrix-gray: #333333;
+    --matrix-red: #ff0000;
+    
+    /* Typography */
+    --font-matrix: 'Courier New', 'Lucida Console', 'Monaco', 'Consolas', monospace;
+    --font-terminal: 'Lucida Console', 'Courier New', monospace;
+    --font-code: 'Consolas', 'Monaco', 'Courier New', monospace;
+    
+    /* Font Sizes */
+    --font-xs: 12px;
+    --font-sm: 14px;
+    --font-md: 16px;
+    --font-lg: 20px;
+    --font-xl: 24px;
+    --font-xxl: 32px;
+    
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-xxl: 48px;
+    
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    
+    /* Z-index layers */
+    --z-bg: -1;
+    --z-content: 1;
+    --z-header: 10;
+    --z-modal: 100;
+    --z-loader: 1000;
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-matrix);
+    background: var(--matrix-black);
+    color: var(--matrix-bright-green);
+    line-height: 1.5;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Selection colors */
+::selection {
+    background: var(--matrix-neon-green);
+    color: var(--matrix-black);
+}
+
+::-moz-selection {
+    background: var(--matrix-neon-green);
+    color: var(--matrix-black);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--matrix-charcoal);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--matrix-dark-green);
+    border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--matrix-lime-green);
+}
+
+/* Typography Classes */
+.glow-text {
+    text-shadow: 
+        0 0 5px var(--matrix-neon-green),
+        0 0 10px var(--matrix-neon-green),
+        0 0 15px var(--matrix-neon-green);
+    color: var(--matrix-neon-green);
+}
+
+.pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+    from {
+        text-shadow: 
+            0 0 5px var(--matrix-neon-green),
+            0 0 10px var(--matrix-neon-green);
+    }
+    to {
+        text-shadow: 
+            0 0 10px var(--matrix-neon-green),
+            0 0 20px var(--matrix-neon-green),
+            0 0 30px var(--matrix-neon-green);
+    }
+}
+
+/* Button Styles */
+.matrix-btn {
+    position: relative;
+    background: transparent;
+    border: 2px solid var(--matrix-dark-green);
+    color: var(--matrix-bright-green);
+    font-family: var(--font-matrix);
+    font-size: var(--font-sm);
+    padding: var(--space-sm) var(--space-md);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    min-height: 44px; /* Touch target */
+    min-width: 44px;
+}
+
+.matrix-btn:hover,
+.matrix-btn:focus {
+    border-color: var(--matrix-neon-green);
+    color: var(--matrix-neon-green);
+    box-shadow: 
+        0 0 10px var(--matrix-neon-green),
+        inset 0 0 10px rgba(0, 255, 0, 0.1);
+}
+
+.matrix-btn:active {
+    transform: scale(0.98);
+}
+
+.btn-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 255, 0, 0.2),
+        transparent
+    );
+    transition: left 0.5s;
+}
+
+.matrix-btn:hover .btn-glow {
+    left: 100%;
+}
+
+/* Layout Components */
+.app {
+    min-height: 100vh;
+    position: relative;
+    z-index: var(--z-content);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Header Styles */
+.matrix-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--matrix-dark-green);
+    z-index: var(--z-header);
+    padding: var(--space-md) 0;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.logo {
+    font-size: var(--font-xl);
+    font-weight: bold;
+    margin: 0;
+}
+
+.tagline {
+    font-size: var(--font-xs);
+    opacity: 0.8;
+}
+
+.header-nav {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+}
+
+/* Main Content */
+.main-content {
+    margin-top: 120px; /* Account for fixed header */
+    padding: var(--space-lg) var(--space-md);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Feed Styles */
+.feed-section {
+    margin-bottom: var(--space-xxl);
+}
+
+.feed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--matrix-dark-green);
+    padding-bottom: var(--space-md);
+}
+
+.section-title {
+    font-size: var(--font-lg);
+    margin: 0;
+}
+
+.feed-stats {
+    display: flex;
+    gap: var(--space-lg);
+    font-size: var(--font-sm);
+}
+
+.stat-item {
+    color: var(--matrix-lime-green);
+}
+
+.stat-value {
+    color: var(--matrix-neon-green);
+    font-weight: bold;
+}
+
+/* Posts Grid */
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.post-card {
+    background: var(--matrix-charcoal);
+    border: 1px solid var(--matrix-dark-green);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.post-card:hover {
+    border-color: var(--matrix-lime-green);
+    box-shadow: 
+        0 0 20px rgba(0, 255, 0, 0.1),
+        inset 0 0 20px rgba(0, 255, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+/* Loading States */
+.loading-more {
+    text-align: center;
+    padding: var(--space-xl);
+}
+
+.loading-text {
+    font-size: var(--font-md);
+}
+
+.load-more-btn {
+    display: block;
+    margin: var(--space-xl) auto;
+    padding: var(--space-md) var(--space-xl);
+}
+
+/* Footer */
+.matrix-footer {
+    border-top: 1px solid var(--matrix-dark-green);
+    padding: var(--space-xl) var(--space-md);
+    text-align: center;
+    margin-top: var(--space-xxl);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-text {
+    font-size: var(--font-sm);
+    margin-bottom: var(--space-md);
+    opacity: 0.8;
+}
+
+.footer-stats {
+    font-size: var(--font-xs);
+}
+
+.online-indicator {
+    color: var(--matrix-lime-green);
+}
+
+/* Utility Classes */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+
+.p-sm { padding: var(--space-sm); }
+.p-md { padding: var(--space-md); }
+.p-lg { padding: var(--space-lg); }
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+    :root {
+        --font-xs: 11px;
+        --font-sm: 13px;
+        --font-md: 15px;
+        --font-lg: 18px;
+        --font-xl: 22px;
+        --font-xxl: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --space-md: 12px;
+        --space-lg: 20px;
+        --space-xl: 28px;
+        --space-xxl: 40px;
+    }
+}
