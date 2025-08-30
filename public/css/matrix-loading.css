@@ -1,0 +1,360 @@
+/* Matrix Loading Screens - Boot sequences and loading animations */
+
+/* Main loader overlay */
+.matrix-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--matrix-black);
+    z-index: var(--z-loader);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease-out;
+}
+
+.matrix-loader.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Loader content container */
+.loader-content {
+    z-index: var(--z-loader);
+    text-align: center;
+    padding: var(--space-xl);
+    max-width: 500px;
+    width: 90%;
+}
+
+/* Matrix loading text */
+.matrix-text {
+    font-size: var(--font-xl);
+    font-weight: bold;
+    margin-bottom: var(--space-xl);
+    font-family: var(--font-matrix);
+    letter-spacing: 2px;
+}
+
+/* Progress container */
+.progress-container {
+    margin-top: var(--space-lg);
+}
+
+/* Progress bar */
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background: var(--matrix-charcoal);
+    border: 1px solid var(--matrix-dark-green);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: var(--space-md);
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        var(--matrix-dark-green),
+        var(--matrix-lime-green),
+        var(--matrix-neon-green)
+    );
+    width: 0%;
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.6)
+    );
+    animation: progressShine 2s ease-in-out infinite;
+}
+
+@keyframes progressShine {
+    0% { transform: translateX(-20px); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateX(20px); opacity: 0; }
+}
+
+/* Progress text */
+.progress-text {
+    font-size: var(--font-sm);
+    color: var(--matrix-lime-green);
+    font-family: var(--font-terminal);
+    min-height: 20px;
+}
+
+/* Boot sequence styles */
+.boot-sequence {
+    text-align: left;
+    font-family: var(--font-terminal);
+    font-size: var(--font-sm);
+    line-height: 1.6;
+    max-width: 600px;
+    width: 90%;
+}
+
+.boot-line {
+    margin-bottom: var(--space-xs);
+    opacity: 0;
+    animation: bootLineAppear 0.1s ease-out forwards;
+}
+
+.boot-line.ok {
+    color: var(--matrix-neon-green);
+}
+
+.boot-line.loading {
+    color: var(--matrix-electric-green);
+}
+
+.boot-line.error {
+    color: var(--matrix-red);
+}
+
+@keyframes bootLineAppear {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Matrix boot animation */
+.matrix-boot {
+    display: none;
+}
+
+.matrix-boot.active {
+    display: block;
+    animation: matrixBootSequence 0.5s ease-out;
+}
+
+@keyframes matrixBootSequence {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Terminal-style loading */
+.terminal-loading {
+    background: var(--matrix-deep-black);
+    border: 2px solid var(--matrix-dark-green);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    font-family: var(--font-terminal);
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+.terminal-header-loading {
+    color: var(--matrix-lime-green);
+    font-size: var(--font-xs);
+    margin-bottom: var(--space-md);
+    border-bottom: 1px solid var(--matrix-dark-green);
+    padding-bottom: var(--space-xs);
+}
+
+.terminal-content-loading {
+    color: var(--matrix-bright-green);
+    font-size: var(--font-sm);
+}
+
+/* Dots animation */
+.loading-dots::after {
+    content: '';
+    animation: loadingDots 1.5s steps(4, end) infinite;
+}
+
+@keyframes loadingDots {
+    0%, 25% { content: '.'; }
+    26%, 50% { content: '..'; }
+    51%, 75% { content: '...'; }
+    76%, 100% { content: ''; }
+}
+
+/* Spinner variations */
+.matrix-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 0 var(--space-xs);
+}
+
+.spinner-chars {
+    animation: spinChars 1s linear infinite;
+}
+
+@keyframes spinChars {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(90deg); }
+    50% { transform: rotate(180deg); }
+    75% { transform: rotate(270deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.spinner-chars::after {
+    content: '|';
+    color: var(--matrix-neon-green);
+    font-weight: bold;
+}
+
+/* Matrix-style processing indicator */
+.processing-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin: var(--space-md) 0;
+}
+
+.processing-blocks {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.processing-block {
+    width: 8px;
+    height: 8px;
+    background: var(--matrix-dark-green);
+    animation: processingPulse 1.2s ease-in-out infinite;
+}
+
+.processing-block:nth-child(2) { animation-delay: 0.2s; }
+.processing-block:nth-child(3) { animation-delay: 0.4s; }
+.processing-block:nth-child(4) { animation-delay: 0.6s; }
+
+@keyframes processingPulse {
+    0%, 80%, 100% {
+        background: var(--matrix-dark-green);
+        transform: scale(1);
+    }
+    40% {
+        background: var(--matrix-neon-green);
+        transform: scale(1.2);
+    }
+}
+
+/* Upload progress */
+.upload-progress {
+    margin-top: var(--space-lg);
+}
+
+.upload-status {
+    font-size: var(--font-sm);
+    color: var(--matrix-lime-green);
+    margin-bottom: var(--space-sm);
+    text-align: center;
+}
+
+/* Error loading state */
+.loading-error {
+    color: var(--matrix-red);
+    text-align: center;
+    padding: var(--space-lg);
+}
+
+.loading-error::before {
+    content: '⚠ ';
+    font-size: var(--font-lg);
+    display: block;
+    margin-bottom: var(--space-sm);
+}
+
+/* Success loading state */
+.loading-success {
+    color: var(--matrix-neon-green);
+    text-align: center;
+    padding: var(--space-lg);
+}
+
+.loading-success::before {
+    content: '✓ ';
+    font-size: var(--font-lg);
+    display: block;
+    margin-bottom: var(--space-sm);
+}
+
+/* Mobile loading optimizations */
+@media (max-width: 480px) {
+    .loader-content {
+        padding: var(--space-lg) var(--space-md);
+    }
+    
+    .matrix-text {
+        font-size: var(--font-lg);
+        letter-spacing: 1px;
+    }
+    
+    .boot-sequence {
+        font-size: var(--font-xs);
+    }
+    
+    .terminal-loading {
+        padding: var(--space-md);
+    }
+    
+    /* Reduce animation complexity on mobile */
+    .progress-fill::after {
+        display: none;
+    }
+    
+    .processing-block {
+        animation-duration: 2s; /* Slower for battery */
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .progress-fill::after {
+        animation: none;
+        display: none;
+    }
+    
+    .processing-block {
+        animation: none;
+        background: var(--matrix-lime-green);
+    }
+    
+    .spinner-chars {
+        animation: none;
+    }
+    
+    .spinner-chars::after {
+        content: '●';
+    }
+    
+    .boot-line {
+        animation: none;
+        opacity: 1;
+    }
+}
+
+/* Network-aware loading */
+@media (prefers-reduced-data: reduce) {
+    .progress-fill::after {
+        display: none;
+    }
+    
+    .matrix-loader {
+        background: var(--matrix-black); /* Solid background */
+    }
+}
