@@ -1,0 +1,331 @@
+/* Matrix Mobile Styles - Optimized for low-end Android devices */
+
+/* Mobile-first responsive design */
+@media (max-width: 768px) {
+    /* Reduce glow effects for performance */
+    .glow-text {
+        text-shadow: 0 0 3px var(--matrix-neon-green);
+    }
+    
+    .pulse-glow {
+        animation-duration: 3s; /* Slower animation for battery */
+    }
+    
+    /* Header adjustments */
+    .header-container {
+        padding: 0 var(--space-sm);
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+    }
+    
+    .logo-section {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .logo {
+        font-size: var(--font-lg);
+    }
+    
+    .tagline {
+        font-size: 10px;
+    }
+    
+    .header-nav {
+        gap: var(--space-sm);
+    }
+    
+    /* Adjust main content spacing */
+    .main-content {
+        margin-top: 100px; /* Reduced header height */
+        padding: var(--space-md) var(--space-sm);
+    }
+    
+    /* Mobile posts grid */
+    .posts-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+    
+    .feed-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-sm);
+    }
+    
+    .feed-stats {
+        font-size: var(--font-xs);
+        gap: var(--space-md);
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    /* Further reduce animations for very low-end devices */
+    .glitch-text::before,
+    .glitch-text::after {
+        display: none; /* Remove glitch effect on small screens */
+    }
+    
+    /* Simplified buttons for touch */
+    .matrix-btn {
+        padding: var(--space-md) var(--space-lg);
+        font-size: var(--font-sm);
+        min-height: 48px; /* Larger touch targets */
+        border-width: 1px; /* Thinner borders */
+    }
+    
+    .btn-glow {
+        display: none; /* Remove glow effects for performance */
+    }
+    
+    /* Header for tiny screens */
+    .header-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: var(--space-sm);
+    }
+    
+    .logo {
+        font-size: var(--font-md);
+    }
+    
+    .header-nav {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .matrix-btn {
+        flex: 1;
+        max-width: 120px;
+    }
+    
+    /* Main content adjustments */
+    .main-content {
+        margin-top: 140px; /* Account for taller mobile header */
+    }
+    
+    /* Simplified terminal windows */
+    .terminal-window {
+        border-width: 1px;
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
+    }
+    
+    .terminal-header {
+        padding: var(--space-xs) var(--space-sm);
+    }
+    
+    .terminal-body {
+        padding: var(--space-sm);
+        min-height: 150px;
+    }
+}
+
+/* Ultra-low-end device optimizations */
+@media (max-width: 320px) {
+    :root {
+        /* Reduce font sizes further */
+        --font-xs: 10px;
+        --font-sm: 12px;
+        --font-md: 14px;
+        --font-lg: 16px;
+        --font-xl: 18px;
+        --font-xxl: 22px;
+        
+        /* Reduce spacing */
+        --space-xs: 2px;
+        --space-sm: 6px;
+        --space-md: 12px;
+        --space-lg: 18px;
+        --space-xl: 24px;
+        --space-xxl: 36px;
+    }
+    
+    /* Minimal effects */
+    .scan-lines::before {
+        display: none;
+    }
+    
+    .digital-distortion::before {
+        display: none;
+    }
+    
+    .electric-effect::after {
+        display: none;
+    }
+    
+    /* Simplified layout */
+    .posts-grid {
+        gap: var(--space-sm);
+    }
+    
+    .post-card:hover {
+        transform: none; /* Remove transform for performance */
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
+    }
+}
+
+/* Touch-specific optimizations */
+@media (hover: none) and (pointer: coarse) {
+    /* Larger touch targets */
+    .matrix-btn {
+        min-height: 48px;
+        padding: var(--space-md) var(--space-lg);
+    }
+    
+    /* Remove hover effects that don't work on touch */
+    .post-card:hover {
+        transform: none;
+        border-color: var(--matrix-dark-green);
+        box-shadow: none;
+    }
+    
+    /* Touch-friendly form elements */
+    .terminal-input {
+        min-height: 44px;
+        padding: var(--space-md) var(--space-sm);
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+    
+    .terminal-textarea {
+        min-height: 120px;
+        font-size: 16px;
+    }
+}
+
+/* Landscape orientation on mobile */
+@media (max-width: 896px) and (orientation: landscape) {
+    .main-content {
+        margin-top: 80px; /* Reduced for landscape */
+    }
+    
+    .posts-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    
+    .matrix-header {
+        padding: var(--space-sm) 0;
+    }
+}
+
+/* Performance optimizations for low-end devices */
+@media (max-width: 480px) {
+    /* Reduce animation complexity */
+    * {
+        will-change: auto !important;
+    }
+    
+    /* Disable heavy animations */
+    .typing-effect {
+        animation: none;
+        border-right: none;
+        width: auto;
+    }
+    
+    .blinking {
+        animation-duration: 2s; /* Slower blinking */
+    }
+    
+    /* Simplified matrix rain for mobile */
+    .matrix-rain-bg,
+    .main-matrix-bg {
+        opacity: 0.3; /* Reduced opacity */
+    }
+}
+
+/* High DPI display adjustments */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Ensure crisp borders on high DPI */
+    .matrix-btn {
+        border-width: 0.5px;
+    }
+    
+    .terminal-window {
+        border-width: 1px;
+    }
+}
+
+/* Battery saving mode compatibility */
+@media (prefers-reduced-motion: reduce) {
+    /* Disable all animations */
+    .pulse-glow,
+    .neon-border,
+    .processingPulse,
+    .electricPulse,
+    .digitalFlicker {
+        animation: none !important;
+    }
+    
+    /* Remove resource-heavy effects */
+    .matrix-rain-bg,
+    .main-matrix-bg {
+        display: none;
+    }
+    
+    .glow-text {
+        text-shadow: none;
+        color: var(--matrix-bright-green);
+    }
+}
+
+/* Network-aware optimizations */
+@media (prefers-reduced-data: reduce) {
+    /* Minimal visual effects */
+    .scan-lines::before,
+    .digital-distortion::before,
+    .electric-effect::after {
+        display: none;
+    }
+    
+    /* Reduce background complexity */
+    .matrix-rain-bg,
+    .main-matrix-bg {
+        opacity: 0.2;
+    }
+}
+
+/* Focus improvements for mobile */
+.matrix-btn:focus,
+.terminal-input:focus,
+.terminal-textarea:focus {
+    outline: 2px solid var(--matrix-neon-green);
+    outline-offset: 2px;
+}
+
+/* Loading states for mobile */
+.loading-more {
+    padding: var(--space-lg) var(--space-sm);
+}
+
+/* Mobile-specific utility classes */
+.mobile-only {
+    display: none;
+}
+
+.desktop-only {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .mobile-only {
+        display: block;
+    }
+    
+    .desktop-only {
+        display: none;
+    }
+}
+
+/* Safe area support for modern mobile devices */
+@supports (padding: max(0px)) {
+    .matrix-header {
+        padding-left: max(var(--space-md), env(safe-area-inset-left));
+        padding-right: max(var(--space-md), env(safe-area-inset-right));
+    }
+    
+    .main-content {
+        padding-left: max(var(--space-md), env(safe-area-inset-left));
+        padding-right: max(var(--space-md), env(safe-area-inset-right));
+    }
+}
