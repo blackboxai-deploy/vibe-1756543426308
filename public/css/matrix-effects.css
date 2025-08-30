@@ -1,0 +1,402 @@
+/* Matrix Effects - Animations and visual effects */
+
+/* Glitch Text Effect */
+.glitch-text {
+    position: relative;
+    display: inline-block;
+    color: var(--matrix-neon-green);
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch-text::before {
+    animation: glitch-1 3s linear infinite;
+    color: var(--matrix-electric-green);
+    z-index: -1;
+}
+
+.glitch-text::after {
+    animation: glitch-2 3s linear infinite;
+    color: var(--matrix-red);
+    z-index: -2;
+}
+
+@keyframes glitch-1 {
+    0%, 14%, 15%, 49%, 50%, 99%, 100% {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+    1%, 13% {
+        transform: translate3d(-2px, 0, 0);
+        opacity: 0.8;
+    }
+    16%, 48% {
+        transform: translate3d(2px, -1px, 0);
+        opacity: 0.9;
+    }
+}
+
+@keyframes glitch-2 {
+    0%, 20%, 21%, 62%, 63%, 99%, 100% {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+    2%, 19% {
+        transform: translate3d(2px, 1px, 0);
+        opacity: 0.7;
+    }
+    22%, 61% {
+        transform: translate3d(-1px, 1px, 0);
+        opacity: 0.8;
+    }
+}
+
+/* Scan Lines Effect */
+.scan-lines {
+    position: relative;
+    overflow: hidden;
+}
+
+.scan-lines::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 0, 0.03) 2px,
+        rgba(0, 255, 0, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Matrix Rain Background Canvas */
+.matrix-rain-bg,
+.main-matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: var(--z-bg);
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* Terminal Window Effect */
+.terminal-window {
+    background: var(--matrix-black);
+    border: 2px solid var(--matrix-dark-green);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 0, 0.1),
+        inset 0 0 20px rgba(0, 255, 0, 0.05);
+}
+
+.terminal-header {
+    background: var(--matrix-charcoal);
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--matrix-dark-green);
+    font-size: var(--font-xs);
+    color: var(--matrix-lime-green);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.terminal-body {
+    padding: var(--space-md);
+    min-height: 200px;
+    background: var(--matrix-deep-black);
+}
+
+.terminal-line {
+    margin-bottom: var(--space-sm);
+    font-family: var(--font-terminal);
+}
+
+.prompt {
+    color: var(--matrix-neon-green);
+    font-weight: bold;
+}
+
+.command {
+    color: var(--matrix-bright-green);
+    margin-left: var(--space-sm);
+}
+
+/* Typing Effect */
+.typing-effect {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 2s steps(40, end), blink-caret 0.75s step-end infinite;
+    border-right: 3px solid var(--matrix-neon-green);
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+/* Blinking Cursor */
+.cursor {
+    display: inline-block;
+    background: var(--matrix-neon-green);
+    color: var(--matrix-black);
+    width: 10px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    margin-left: 2px;
+}
+
+.blinking {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}
+
+/* Matrix Button Hover Effects */
+.matrix-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.matrix-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(57, 255, 20, 0.4), transparent);
+    transition: left 0.6s ease;
+    z-index: -1;
+}
+
+.matrix-btn:hover::before {
+    left: 100%;
+}
+
+/* Digital Distortion Effect */
+.digital-distortion {
+    position: relative;
+    filter: contrast(1.2) brightness(1.1);
+}
+
+.digital-distortion::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        repeating-linear-gradient(90deg, transparent 0px, rgba(0, 255, 0, 0.03) 1px, rgba(0, 255, 0, 0.03) 2px, transparent 2px, transparent 4px),
+        repeating-linear-gradient(0deg, transparent 0px, rgba(0, 255, 0, 0.03) 1px, rgba(0, 255, 0, 0.03) 2px, transparent 2px, transparent 4px);
+    pointer-events: none;
+    opacity: 0.8;
+    animation: digitalFlicker 0.15s infinite linear alternate-reverse;
+}
+
+@keyframes digitalFlicker {
+    0% { opacity: 0.8; }
+    2% { opacity: 0.6; }
+    4% { opacity: 0.8; }
+    19% { opacity: 0.8; }
+    21% { opacity: 0.4; }
+    23% { opacity: 0.8; }
+    97% { opacity: 0.8; }
+    98% { opacity: 0.2; }
+    100% { opacity: 0.8; }
+}
+
+/* Neon Border Glow */
+.neon-border {
+    border: 2px solid var(--matrix-neon-green);
+    box-shadow: 
+        0 0 5px var(--matrix-neon-green),
+        0 0 10px var(--matrix-neon-green),
+        0 0 15px var(--matrix-neon-green),
+        inset 0 0 5px var(--matrix-neon-green);
+    animation: neonPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes neonPulse {
+    from {
+        box-shadow: 
+            0 0 5px var(--matrix-neon-green),
+            0 0 10px var(--matrix-neon-green),
+            0 0 15px var(--matrix-neon-green),
+            inset 0 0 5px var(--matrix-neon-green);
+    }
+    to {
+        box-shadow: 
+            0 0 2px var(--matrix-neon-green),
+            0 0 5px var(--matrix-neon-green),
+            0 0 8px var(--matrix-neon-green),
+            inset 0 0 2px var(--matrix-neon-green);
+    }
+}
+
+/* Matrix Code Snippet */
+.matrix-code {
+    font-family: var(--font-code);
+    background: var(--matrix-deep-black);
+    color: var(--matrix-lime-green);
+    padding: var(--space-md);
+    border-left: 3px solid var(--matrix-neon-green);
+    overflow-x: auto;
+    font-size: var(--font-sm);
+    line-height: 1.4;
+}
+
+/* Electrical Discharge Effect */
+.electric-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.electric-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(57, 255, 20, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 30%, rgba(0, 255, 127, 0.2) 0%, transparent 50%);
+    opacity: 0;
+    animation: electricPulse 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes electricPulse {
+    0%, 90%, 100% { opacity: 0; }
+    5%, 85% { opacity: 1; }
+}
+
+/* Matrix Form Elements */
+.terminal-input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--matrix-dark-green);
+    color: var(--matrix-bright-green);
+    font-family: var(--font-matrix);
+    font-size: var(--font-md);
+    padding: var(--space-sm) var(--space-xs);
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.terminal-input:focus {
+    outline: none;
+    border-bottom-color: var(--matrix-neon-green);
+    box-shadow: 0 1px 0 0 var(--matrix-neon-green);
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.terminal-input::placeholder {
+    color: var(--matrix-dark-green);
+    opacity: 0.7;
+}
+
+.terminal-label {
+    color: var(--matrix-lime-green);
+    font-size: var(--font-sm);
+    font-weight: bold;
+    display: block;
+    margin-bottom: var(--space-xs);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.terminal-textarea {
+    background: transparent;
+    border: 2px solid var(--matrix-dark-green);
+    color: var(--matrix-bright-green);
+    font-family: var(--font-matrix);
+    font-size: var(--font-sm);
+    padding: var(--space-sm);
+    width: 100%;
+    min-height: 100px;
+    resize: vertical;
+    transition: all 0.3s ease;
+}
+
+.terminal-textarea:focus {
+    outline: none;
+    border-color: var(--matrix-neon-green);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+    background: rgba(0, 255, 0, 0.05);
+}
+
+/* Status Indicators */
+.status-online {
+    color: var(--matrix-neon-green);
+}
+
+.status-offline {
+    color: var(--matrix-red);
+}
+
+.status-processing {
+    color: var(--matrix-electric-green);
+    animation: processingPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes processingPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .glitch-text::before,
+    .glitch-text::after {
+        animation: none;
+    }
+    
+    .digital-distortion::before {
+        animation: none;
+        opacity: 0.3;
+    }
+    
+    .typing-effect {
+        animation: none;
+        border-right: none;
+        width: auto;
+    }
+    
+    .neon-border {
+        animation: none;
+    }
+}
